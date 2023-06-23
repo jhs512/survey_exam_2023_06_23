@@ -2,11 +2,13 @@ package com.ll.demo16;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SurveyCategoryService {
     private final SurveyCategoryItemRepository surveyCategoryItemRepository;
 
@@ -14,12 +16,13 @@ public class SurveyCategoryService {
         return surveyCategoryItemRepository.findAll();
     }
 
-    public void create(String name) {
+    @Transactional
+    public SurveyCategoryItem create(String name) {
         SurveyCategoryItem surveyCategoryItem = SurveyCategoryItem
                 .builder()
                 .name(name)
                 .build();
 
-        surveyCategoryItemRepository.save(surveyCategoryItem);
+        return surveyCategoryItemRepository.save(surveyCategoryItem);
     }
 }
