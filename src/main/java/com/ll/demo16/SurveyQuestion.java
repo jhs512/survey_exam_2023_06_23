@@ -8,6 +8,7 @@ import lombok.*;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@ToString
 @Getter
 @Setter
 @Entity

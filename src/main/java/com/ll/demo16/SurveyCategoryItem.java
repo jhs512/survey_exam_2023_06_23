@@ -1,5 +1,6 @@
 package com.ll.demo16;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,12 +15,15 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class SurveyCategoryItem {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
 
+    @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "categoryItem", orphanRemoval = true, cascade = CascadeType.ALL)
     @Builder.Default
     private List<SurveyQuestion> questions = new ArrayList<>();

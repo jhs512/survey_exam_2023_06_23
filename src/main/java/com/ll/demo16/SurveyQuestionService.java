@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -22,5 +24,9 @@ public class SurveyQuestionService {
         categoryItem.addQuestion(surveyQuestion);
 
         return surveyQuestion;
+    }
+
+    public List<SurveyQuestion> findByCategoryItemId(Long categoryItemId) {
+        return surveyQuestionRepository.findByCategoryItemId(categoryItemId);
     }
 }
